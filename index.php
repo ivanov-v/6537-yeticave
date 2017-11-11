@@ -16,7 +16,23 @@ $tomorrow = strtotime('tomorrow midnight');
 // временная метка для настоящего времени
 $now = strtotime('now');
 
+// разница во времени
+$difference = $tomorrow - $now;
+
 // далее нужно вычислить оставшееся время до начала следующих суток и записать его в переменную $lot_time_remaining
+$lot_time_remaining = format_time($difference);
+
+function format_time($seconds) {
+    $hours = $seconds / 3600;
+    $floor_hours = floor($hours);
+    $floor_minutes = floor(($hours - $floor_hours) * 60);
+
+    return to_decade($floor_hours) . ':' . to_decade($floor_minutes);
+}
+
+function to_decade($num) {
+    return $num > 9 ? $num : '0' . $num;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
